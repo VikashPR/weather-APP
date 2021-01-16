@@ -1,13 +1,25 @@
-const WEATHER_API = `http://api.openweathermap.org/data/2.5/weather?q=chennai&appid=cc59261c9babd438cfd54003efadeeff`;
+const API = `http://api.openweathermap.org/data/2.5/weather?q=`;
+const API_KEY = `&appid=cc59261c9babd438cfd54003efadeeff`
 const description = document.querySelector('.description');
 const place = document.querySelector('.place');
 const country = document.querySelector('.country');
 const temperature = document.querySelector('.temp');
 const search = document.querySelector('.search');
-const searchLocation = document.querySelector('search-location');
+const searchLocation = document.querySelector('.search-location');
 const image = document.querySelector('.img');
 
-fetch(WEATHER_API)
+function getWeather(api,key) 
+{
+    search.addEventListener('submit', (e)=>
+    {
+        e.preventDefault();
+        const searchTerm = searchLocation.value;
+        WEATHER_API = api+searchTerm+key;
+        return WEATHER_API;
+    })
+}
+getWeather(API,API_KEY);
+fetch()
 .then(response =>
 {
      return response.json();
@@ -16,11 +28,11 @@ fetch(WEATHER_API)
 
 .then(data =>   
 {
-    return getWeather(data);
+    return getData(data);
  
 });
 
-function getWeather(data)
+function getData(data)
 {
     let array = data;
     console.log(array);
@@ -42,7 +54,6 @@ function getWeather(data)
     
 
     let img = data.weather[0].icon;
-    image.innerHTML = `<img src='http://openweathermap.org/img/wn/${img}@4x.png' alt='img'>`
-    console.log("IMAGE:" ,img);
+    image.innerHTML = `<img src='http://openweathermap.org/img/wn/${img}@4x.png' alt='img'>`;
 }
 
