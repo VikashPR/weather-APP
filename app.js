@@ -8,52 +8,47 @@ const search = document.querySelector('.search');
 const searchLocation = document.querySelector('.search-location');
 const image = document.querySelector('.img');
 
-function getWeather(api,key) 
-{
-    search.addEventListener('submit', (e)=>
-    {
+function getWeather(api, key) {
+    search.addEventListener('submit', (e) => {
         e.preventDefault();
         const searchTerm = searchLocation.value;
-        WEATHER_API = api+searchTerm+key;
-        return WEATHER_API;
-    })
-}
-getWeather(API,API_KEY);
-fetch()
-.then(response =>
-{
-     return response.json();
+        // WEATHER_API = ;
+        fetch(api + searchTerm + key)
+            .then(response => {
+                return response.json();
 
-})
+            })
 
-.then(data =>   
-{
-    return getData(data);
- 
-});
+            .then(data => {
+                return getData(data);
 
-function getData(data)
-{
-    let array = data;
-    console.log(array);
+            });
 
-    let des = data.weather[0].description;
-    description.innerHTML = des;
+        function getData(data) {
+            let array = data;
+            console.log(array);
 
-    let temp = data.main.temp;
-    temp = temp-273.15;
-    temp = Math.floor(temp);
-    temperature.innerHTML = temp+"°c";
+            let des = data.weather[0].description;
+            description.innerHTML = des;
 
-    let cntry = data.sys.country;
-    country.innerHTML = cntry; 
+            let temp = data.main.temp;
+            temp = temp - 273.15;
+            temp = Math.floor(temp);
+            temperature.innerHTML = temp + "°c";
+
+            let cntry = data.sys.country;
+            country.innerHTML = cntry;
 
 
-    let location = data.name;
-    place.innerHTML = location;
-    
+            let location = data.name;
+            place.innerHTML = location;
 
-    let img = data.weather[0].icon;
-    image.innerHTML = `<img src='http://openweathermap.org/img/wn/${img}@4x.png' alt='img'>`;
+
+            let img = data.weather[0].icon;
+            image.innerHTML = `<img src='http://openweathermap.org/img/wn/${img}@4x.png' alt='img'>`;
+        }
+
+    });
 }
 
+getWeather(API, API_KEY);
