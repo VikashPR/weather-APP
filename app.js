@@ -1,5 +1,8 @@
-const API = `http://api.openweathermap.org/data/2.5/weather?q=`;
-const API_KEY = `&appid=cc59261c9babd438cfd54003efadeeff`
+const API = `http://api.openweathermap.org/data/2.5/forecast?q=`;
+const API_KEY = `&appid=bc1fcafd8aff393e20555bdef17066e8`
+    
+// http://api.openweathermap.org/data/2.5/forecast?q=rasipuram&appid=bc1fcafd8aff393e20555bdef17066e8
+
 const description = document.querySelector('.description');
 const place = document.querySelector('.place');
 const country = document.querySelector('.country');
@@ -16,7 +19,6 @@ function getWeather(api, key) {
         fetch(api + searchTerm + key)
             .then(response => {
                 return response.json();
-
             })
 
             .then(data => {
